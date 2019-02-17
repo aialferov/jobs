@@ -37,9 +37,9 @@ handle_request(Query, Json) ->
     end.
 
 reply_data(Data, Req) ->
-    IsMap = is_map(Data),
-    {ContentType, Body} = if IsMap -> {?ContentTypeJson, jsx:encode(Data)};
-                         not IsMap -> {?ContentTypeText, Data} end,
+    IsBin = is_binary(Data),
+    {ContentType, Body} = if IsBin -> {?ContentTypeText, Data};
+                         not IsBin -> {?ContentTypeJson, jsx:encode(Data)} end,
 
     ?Log:response(Req, ?CodeOk, Body),
     cowboy_req:reply(?CodeOk, ContentType, Body, Req).
