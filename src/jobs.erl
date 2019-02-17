@@ -32,7 +32,7 @@
 -define(Version, "Version ~s (git-~s)~n").
 
 main(Args) ->
-    application:ensure_all_started(?MODULE),
+    application:start(?MODULE),
     case Args of
         ["run"] -> run();
         ["help"] -> show_usage();
@@ -41,6 +41,7 @@ main(Args) ->
     end.
 
 run() ->
+    application:ensure_all_started(?MODULE),
     cpf_node:start(?MODULE),
     console(),
     cpf_node:stop().
