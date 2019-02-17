@@ -3,14 +3,14 @@
 [![License: MIT][MIT Badge]][MIT]
 [![GitHub Release Badge]][GitHub Releases]
 
-An HTTP service for converting JSON based tasks
+An HTTP service for converting JSON based tasks.
 
 ## Usage
 
 You can use [Docker] to run the service without other dependencies needed:
 
 ```
-$ docker run --name jobs --rm -it -p 8080:8080 aialferov/jobs
+$ docker run --name jobs --rm -it -p 8080:8080 aialferov/jobs run
 ```
 
 After you have run the service you get into the service console. There you can
