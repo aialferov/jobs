@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: jobs
+  name: jobs
+spec:
+  selector:
+    matchLabels:
+      run: jobs
+  template:
+    metadata:
+      labels:
+        run: jobs
+    spec:
+      containers:
+      - name: jobs
+        args:
+        - run
+        image: aialferov/jobs
+        imagePullPolicy: Always
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: 8080

@@ -42,6 +42,24 @@ Erlang VM, Docker image related operations and others.
 
 Run "make usage" and "make docker-usage" to see them all.
 
+### Kubernetes
+
+To run the service as a [Kubernetes] deployment, just create it from the
+manifest:
+
+```
+$ kubectl create -f https://raw.githubusercontent.com/aialferov/jobs/master/manifests/jobs.yaml
+```
+
+When the pod is running you can attach to the service console:
+
+```
+$ POD=$(kubectl get po -l run=jobs -o jsonpath={.items[*].metadata.name})
+$ kubectl attach -it $POD
+```
+
+You have to close the window as there is no other way to detach.
+
 ### Make Interface
 
 [Make] interface is provided for operational purposes and is based on the [Mk]
@@ -58,6 +76,7 @@ for details.
 [Docker]: https://docs.docker.io
 [Erlang]: http://erlang.org
 [R3tmpl]: https://github.com/aialferov/r3tmpl
+[Kubernetes]: https://kubernetes.io
 [Docker.mk]: https://github.com/aialferov/mk#dockermk
 [Erlangbin.mk]: https://github.com/aialferov/mk#erlangbinmk
 
