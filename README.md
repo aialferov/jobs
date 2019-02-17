@@ -7,7 +7,7 @@ An HTTP service for converting JSON based tasks
 
 ## Usage
 
-You can use [Docker] to run the service without any other dependency needed:
+You can use [Docker] to run the service without other dependencies needed:
 
 ```
 $ docker run --name jobs --rm -it -p 8080:8080 aialferov/jobs
