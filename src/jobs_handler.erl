@@ -31,8 +31,9 @@ init(Req, State) ->
 
 handle_request(Query, Json) ->
     case Query of
-        [{<<"tasks">>, <<"flatten">>}] -> ?Tasks:flatten(Json);
+        [] -> ?Tasks:scriptize(Json);
         [{<<"tasks">>, <<"scriptize">>}] -> ?Tasks:scriptize(Json);
+        [{<<"tasks">>, <<"flatten">>}] -> ?Tasks:flatten(Json);
         Query -> {error, invalid_query}
     end.
 
