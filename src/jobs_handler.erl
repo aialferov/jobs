@@ -31,15 +31,18 @@ init(Req, State) ->
 
 handle_request(Query, Json) ->
     case Query of
-        [{<<"tasks">>, <<"flatten">>}] -> {ok, ?Tasks:flatten(Json)};
-        [{<<"tasks">>, <<"scriptize">>}] -> {ok, ?Tasks:scriptize(Json)};
+        [{<<"tasks">>, <<"flatten">>}] -> ?Tasks:flatten(Json);
+        [{<<"tasks">>, <<"scriptize">>}] -> ?Tasks:scriptize(Json);
         Query -> {error, invalid_query}
     end.
 
 reply_data(Data, Req) ->
-    Body = jsx:encode(Data),
+    IsMap = is_map(Data),
+    {ContentType, Body} = if IsMap -> {?ContentTypeJson, jsx:encode(Data)};
+                         not IsMap -> {?ContentTypeText, Data} end,
+
     ?Log:response(Req, ?CodeOk, Body),
-    cowboy_req:reply(?CodeOk, ?ContentTypeJson, Body, Req).
+    cowboy_req:reply(?CodeOk, ContentType, Body, Req).
 
 decode_body(Body) ->
     try jsx:decode(Body, [return_maps]) of
