@@ -20,9 +20,9 @@ init(Req0 = #{method := Method, has_body := true}, State) when
         {ok, Json} ->
             case handle_request(Query, Json) of
                 {ok, Response} -> reply_data(Response, Req1);
-                {error, Reason} -> ?HandlerBadRequest:reply(Reason, Req1, State)
+                {error, Reason} -> ?HandlerBadRequest:reply(Reason, Req1)
             end;
-        {error, Reason} -> ?HandlerBadRequest:reply(Reason, Req1, State)
+        {error, Reason} -> ?HandlerBadRequest:reply(Reason, Req1)
     end,
     {ok, Req, State};
 

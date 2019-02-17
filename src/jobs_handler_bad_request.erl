@@ -2,7 +2,7 @@
 
 -export([
     init/2,
-    reply/2, reply/3
+    reply/1, reply/2
 ]).
 
 -include("jobs.hrl").
@@ -10,16 +10,16 @@
 
 -define(Log, jobs_log).
 
-init(Req, State) -> {ok, reply(Req, State), State}.
+init(Req, State) -> {ok, reply(Req), State}.
 
-reply(Req0, State) ->
+reply(Req0) ->
     {ok, Req} = log_request(Req0),
     log_response(Req, "<Usage>"),
 
     Response = lists:flatten(io_lib:format(?JobsApiUsage, [])),
     cowboy_req:reply(?CodeBadRequest, ?ContentTypeText, Response, Req).
 
-reply(Reason, Req0, State) ->
+reply(Reason, Req0) ->
     {ok, Req} = log_request(Req0),
     log_response(Req, Reason),
 
