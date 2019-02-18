@@ -1,13 +1,13 @@
--module('jobs').
+-module('jose').
 
 -export([
     main/1
 ]).
 
--include("jobs.hrl").
+-include("jose.hrl").
 
 -define(Usage,
-    "Usage: jobs <Command>~n"
+    "Usage: jose <Command>~n"
     "~n"
     "Commands~n"
     "       run         Run~n"
@@ -24,14 +24,14 @@
 ).
 
 -define(Greeting,
-    "Welcome to the Jobs service console!~n"
+    "Welcome to the Jose service console!~n"
     "~n"
     "Console usage:~n"
     ?ConsoleUsage
 ).
 -define(Farewell, "Bye.~n").
 
--define(Prompt, "jobs> ").
+-define(Prompt, "jose> ").
 -define(PromptExit,
     "This will stop the service "
     "and make API unavailable, continue? [y/n]: "
@@ -64,7 +64,7 @@ console_loop() ->
         eof -> eof;
 
         Command when Command == "a";
-                     Command == "api" -> io:format(?JobsApiUsage),
+                     Command == "api" -> io:format(?JoseApiUsage),
                                          console_loop();
 
         Command when Command == "e";
@@ -96,7 +96,7 @@ read_input(Prompt) ->
     end.
 
 show_example() ->
-    io:format(?JobsExample).
+    io:format(?JoseExample).
 
 show_usage() ->
     io:format(?Usage).

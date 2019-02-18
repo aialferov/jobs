@@ -1,4 +1,4 @@
--module(jobs_tasks).
+-module(jose_tasks).
 
 -export([
     flatten/1,

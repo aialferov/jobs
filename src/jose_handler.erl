@@ -1,12 +1,12 @@
--module(jobs_handler).
+-module(jose_handler).
 -export([init/2]).
 
--include("jobs_handler.hrl").
+-include("jose_handler.hrl").
 
--define(Tasks, jobs_tasks).
--define(Log, jobs_log).
+-define(Tasks, jose_tasks).
+-define(Log, jose_log).
 
--define(HandlerBadRequest, jobs_handler_bad_request).
+-define(HandlerBadRequest, jose_handler_bad_request).
 
 init(Req0 = #{method := Method, has_body := true}, State) when
     Method == <<"POST">>

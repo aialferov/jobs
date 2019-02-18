@@ -1,4 +1,4 @@
--define(JobsApiUsage,
+-define(JoseApiUsage,
     "POST /api/v1/jobs[?tasks=<flatten|scriptize>] # default: scriptize~n"
     "{~n"
     "  \"tasks\":[~n"
@@ -15,7 +15,7 @@
     "}~n"
 ).
 
--define(JobsExample,
+-define(JoseExample,
     "$ cat example.json~n"
     "{~n"
     "  \"tasks\":[~n"

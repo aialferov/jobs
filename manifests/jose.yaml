@@ -2,22 +2,22 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: jobs
-  name: jobs
+    run: jose
+  name: jose
 spec:
   selector:
     matchLabels:
-      run: jobs
+      run: jose
   template:
     metadata:
       labels:
-        run: jobs
+        run: jose
     spec:
       containers:
-      - name: jobs
+      - name: jose
         args:
         - run
-        image: aialferov/jobs
+        image: aialferov/jose
         imagePullPolicy: Always
         stdin: true
         tty: true

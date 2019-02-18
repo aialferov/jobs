@@ -1,4 +1,4 @@
--module(jobs_app).
+-module(jose_app).
 -behaviour(application).
 
 -export([
@@ -6,9 +6,9 @@
     stop/1, prep_stop/1
 ]).
 
--define(Log, jobs_log).
+-define(Log, jose_log).
 
--define(Listener, jobs_http).
+-define(Listener, jose_http).
 
 start(_StartType, _StartArgs) ->
     {ok, Env} = application:get_key(env),
@@ -16,8 +16,8 @@ start(_StartType, _StartArgs) ->
 
     Dispatch = cowboy_router:compile([
         {'_', [
-            {"/api/v1/jobs", jobs_handler, #{}},
-            {'_', jobs_handler_bad_request, #{}}
+            {"/api/v1/jobs", jose_handler, #{}},
+            {'_', jose_handler_bad_request, #{}}
         ]}
     ]),
     {ok, Pid} = cowboy:start_clear(

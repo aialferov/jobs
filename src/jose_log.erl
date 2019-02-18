@@ -1,4 +1,4 @@
--module(jobs_log).
+-module(jose_log).
 
 -export([
     request/1, request/2,

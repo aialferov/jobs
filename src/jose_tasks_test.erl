@@ -1,8 +1,8 @@
--module('jobs_tasks_test').
+-module('jose_tasks_test').
 
 -include_lib("eunit/include/eunit.hrl").
 
--define(M, 'jobs_tasks').
+-define(M, 'jose_tasks').
 
 flatten_empty_test() ->
     ?assertEqual(

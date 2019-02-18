@@ -1,16 +1,17 @@
-# Jobs Service
+# Jose
 
 [![License: MIT][MIT Badge]][MIT]
 [![GitHub Release Badge]][GitHub Releases]
 
-An HTTP service for converting JSON based tasks.
+Jose (pronounced as "/hoˈse/") stands for "Jobs Service" and is an HTTP service
+for converting JSON based tasks.
 
 ## Usage
 
 You can use [Docker] to run the service without other dependencies needed:
 
 ```
-$ docker run --name jobs --rm -it -p 8080:8080 aialferov/jobs run
+$ docker run --name jose --rm -it -p 8080:8080 aialferov/jose run
 ```
 
 After you have run the service you get into the service console. There you can
@@ -114,7 +115,7 @@ The latter runs executable that is located in "_build/default/bin" after build
 and could be run directly:
 
 ```
-$ _build/default/bin/jobs
+$ _build/default/bin/jose
 ```
 
 Make targets provide many other functions for development and packaging cycle
@@ -129,13 +130,13 @@ To run the service as a [Kubernetes] deployment, just create it from the
 manifest:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/aialferov/jobs/master/manifests/jobs.yaml
+$ kubectl create -f https://raw.githubusercontent.com/aialferov/jose/master/manifests/jose.yaml
 ```
 
 When the pod is running you can attach to the service console:
 
 ```
-$ POD=$(kubectl get po -l run=jobs -o jsonpath={.items[*].metadata.name})
+$ POD=$(kubectl get po -l run=jose -o jsonpath={.items[*].metadata.name})
 $ kubectl attach -it $POD
 ```
 
@@ -150,7 +151,7 @@ for details.
 <!-- Links -->
 
 [MIT]: https://opensource.org/licenses/MIT
-[GitHub Releases]: https://github.com/aialferov/jobs/releases
+[GitHub Releases]: https://github.com/aialferov/jose/releases
 
 [Mk]: https://github.com/aialferov/mk
 [Make]: https://www.gnu.org/software/make
@@ -164,5 +165,6 @@ for details.
 <!-- Badges -->
 
 [MIT Badge]: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square
-[GitHub Release Badge]: https://img.shields.io/github/release/aialferov/jobs/all.svg?style=flat-square
+[GitHub Release Badge]: https://img.shields.io/github/release/aialferov/jose/all.svg?style=flat-square
  
+
