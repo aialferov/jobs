@@ -17,6 +17,87 @@ After you have run the service you get into the service console. There you can
 run commands to get some information about the service, for example about API it
 provides or the API usage example.
 
+### API
+
+The service exposes the following API:
+
+```
+POST /api/v1/jobs[?tasks=<Command>]
+<Tasks>
+
+Commands:
+    flatten    sort given tasks in accordance with dependencies specification
+    scriptize  same as flatten but make an executable shell script of it
+```
+
+Where "Tasks" is a JSON with the following format:
+
+```
+{
+  "tasks":[
+    {
+      "name":"<Task Name>",
+      "command":"<Shell Command>"
+      "requires":[ # optional
+        "<Another Task Name>"
+        ...
+      ]
+    },
+    ...
+   ]
+}
+```
+
+#### Example
+
+Given the following example JSON:
+
+```
+$ cat example.json
+{
+  "tasks":[
+    {
+      "name":"task-1",
+      "command":"cat /tmp/file1",
+      "requires":[
+        "task-2"
+      ]
+    },
+    {
+      "name":"task-2",
+      "command":"echo 'Hello World!' > /tmp/file1",
+    }
+  ]
+}
+```
+
+We expect the "task-2" happens before the "task-1". Check it with flattening
+first:
+
+```
+$ curl -sd @example.json localhost:8080/api/v1/jobs?tasks=flatten | jq
+[
+  {
+    "command": "echo 'Hello World!' > /tmp/file1",
+    "name": "task-2"
+  },
+  {
+    "command": "cat /tmp/file1",
+    "name": "task-1"
+  }
+]
+```
+
+And then create an executable script:
+
+```
+$ curl -sd @example.json localhost:8080/api/v1/jobs?tasks=scriptize
+#!/bin/bash
+
+echo 'Hello World!' > /tmp/file1
+cat /tmp/file1
+```
+
 ### Without Docker
 
 You will need [Erlang] installed in your system to build and run the service.
