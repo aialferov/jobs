@@ -4,6 +4,7 @@ include mk/Docker.mk
 USER = aialferov
 PORT = 8080
 
+ERLANG_VERSION = 21.2
 RUN_ARGS = run
 
 DOCKER_RUN_ARGS_EXTRA = \
