@@ -127,7 +127,7 @@ Run "make usage" and "make docker-usage" to see them all.
 ### Kubernetes
 
 To run the service as a [Kubernetes] deployment, just create it from the
-manifest:
+[Manifest]:
 
 ```
 $ kubectl create -f https://raw.githubusercontent.com/aialferov/jose/master/manifests/jose.yaml
@@ -161,6 +161,7 @@ for details.
 [Kubernetes]: https://kubernetes.io
 [Docker.mk]: https://github.com/aialferov/mk#dockermk
 [Erlangbin.mk]: https://github.com/aialferov/mk#erlangbinmk
+[Manifest]: manifests/jose.yaml
 
 <!-- Badges -->
 
