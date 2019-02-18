@@ -28,25 +28,24 @@ validate(Json) ->
     end.
 
 flatten_tasks(Tasks) ->
-    State = {[], task_map(Tasks)},
-    {Flattened, _TaskMap} = lists:foldl(fun flatten_task/2, State, Tasks),
+    Names = [Name || #{<<"name">> := Name} <- Tasks],
+
+    TaskMap = lists:foldl(fun(Task = #{<<"name">> := Name}, Map) ->
+        maps:put(Name, Task, Map)
+    end, #{}, Tasks),
+
+    State = {[], TaskMap},
+    {Flattened, _TaskMap} = lists:foldl(fun flatten_task/2, State, Names),
+
     lists:reverse(Flattened).
 
-flatten_task(Task, State) ->
-    NewState = flatten_task_add_deps(maps:get(<<"requires">>, Task, []), State),
-    flatten_task_add_task(maps:get(<<"name">>, Task), NewState).
-
-flatten_task_add_deps(Deps, {Flattened, TaskMap}) ->
-    lists:foldl(fun flatten_task_add_task/2, {Flattened, TaskMap}, Deps).
-
-flatten_task_add_task(Name, {Flattened, TaskMap}) ->
-    case maps:take(Name, TaskMap) of
-        {Task, NewTaskMap} -> {[Task|Flattened], NewTaskMap};
-        error -> {Flattened, TaskMap}
+flatten_task(Name, {Flattened0, TaskMap0}) ->
+    case maps:take(Name, TaskMap0) of
+        {Task, TaskMap1} ->
+            Deps = maps:get(<<"requires">>, Task, []),
+            {Flattened, TaskMap} =
+                lists:foldl(fun flatten_task/2, {Flattened0, TaskMap1}, Deps),
+            {[maps:remove(<<"requires">>, Task)|Flattened], TaskMap};
+        error ->
+            {Flattened0, TaskMap0}
     end.
-
-task_map(Tasks) ->
-    lists:foldl(fun(Task, Map) ->
-        Name = maps:get(<<"name">>, Task),
-        maps:put(Name, maps:remove(<<"requires">>, Task), Map)
-    end, #{}, Tasks).
