@@ -142,6 +142,11 @@ $ kubectl attach -it $POD
 
 You have to close the window as there is no other way to detach.
 
+### Tests
+
+There are bunch of tests provided for testing the API. Please refer
+[Jose Acceptance Tests] for more details.
+
 ### Make Interface
 
 [Make] interface is provided for operational purposes and is based on the [Mk]
@@ -162,6 +167,7 @@ for details.
 [Docker.mk]: https://github.com/aialferov/mk#dockermk
 [Erlangbin.mk]: https://github.com/aialferov/mk#erlangbinmk
 [Manifest]: manifests/jose.yaml
+[Jose Acceptance Tests]: http://github.com/aialferov/jose-at
 
 <!-- Badges -->
 
